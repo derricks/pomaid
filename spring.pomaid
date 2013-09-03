@@ -1,0 +1,140 @@
+groupId: org.springframework
+artifactId:spring-webmvc
+version: 3.2.4.RELEASE
+
+name: Spring Web MVC
+description: Spring Web MVC
+url: https://github.com/SpringSource/spring-framework
+
+```
+<organization>
+```
+->
+  name: SpringSource
+  url: http://springsource.org/spring-framework
+<-
+```
+</organization>
+<licenses>
+  <license>
+```
+-> ->
+    name: The Apache Software License, Version 2.0
+    url:http://www.apache.org/licenses/LICENSE-2.0.txt
+    distribution:repo
+<- <-
+```
+  </license>
+</licenses>
+<developers>
+  <developer>
+```
+-> ->
+    id:jhoeller
+    name: Juergen Hoeller
+    email:jhoeller@vmware.com
+<- <-
+```
+  </developer>
+</developers>
+<scm>
+```
+->
+  connection: scm:git:git://github.com/SpringSource/spring-framework
+  developerConnection: scm:git:git://github.com/SpringSource/spring-framework
+  url: https://github.com/SpringSource/spring-framework
+<-
+```
+</scm>
+```
+
++ com.fasterxml.jackson.core:jackson-databind:2.0.1
+  scope: compile
+  optional: true
++ com.lowagie:itext:2.1.7
+  scope: compile
+  optional:true
++ jasperreports:jasperreports:2.0.5
+  scope: compile
+  optional:true
+  -xml-apis:xml-apis
++ net.sourceforge.jexcelapi:jxl:2.6.3
+  scope: compile
+  optional: true
++ org.apache.poi:poi:3.0.2-FINAL
+  scope: compile
+  optional: true
++ org.apache.tiles
+  :tiles-api:3.0.1
+    scope: compile
+    optional: true
+  :tiles-core:3.0.1
+    scope: compile
+    optional: true
+    - org.slf4j:jcl-over-slf4j
+  :tiles-core:2.1.2
+    scope: compile
+    optional: true
+  :tiles-el:3.0.1
+    scope: compile
+    optional: true
+    - org.slf4j:jcl-over-slf4j
+  :tiles-extras:3.0.1
+    scope: compile
+    optional: true
+    - org.slf4j:jcl-over-slf4j
+  :tiles-jsp:3.0.1
+    scope: compile
+    optional: true
+    - org.slf4j:jcl-over-slf4j
+  :tiles-request-api:1.0.1
+    scope: compile
+    optional: true
+  :tiles-servlet:2.1.2
+    scope: compile
+    optional: true
+  :tiles-servlet:3.0.1
+    scope: compile
+    optional: true
+    - org.slf4j:jcl-over-slf4j
++ org.codehaus.jackson:jackson-mapper-asl:1.4.2
+  scope: compile
+  optional: true
++ org.freemarker:freemarker:2.3.15
+  scope: compile
+  optional: true
++ org.springframework
+  :spring-beans:3.2.4.RELEASE
+    scope: compile
+  :spring-context:3.2.4.RELEASE
+    scope: compile
+  :spring-context-support:3.2.4.RELEASE
+    scope: compile
+    optional: true
+  :spring-core:3.2.4.RELEASE
+    scope: compile
+  :spring-expression:3.2.4.RELEASE
+    scope:compile
+  :spring-oxm:3.2.4.RELEASE
+    scope: compile
+  :spring-web:3.2.4.RELEASE
+    scope: compile
++rome:rome:1.0
+  scope: compile
+  optional: true
++velocity-tools:velocity-tools-view:1.4
+  scope: compile
+  optional: true
++ velocity:velocity:1.5
+  scope: compile
+  optional: true
++ javax.el:el-api:1.0
+  scope: provided
++ javax.servlet.jsp:jsp-api:2.1
+  scope: provided
++ javax.servlet
+  :javax.servlet-api:3.0.1
+    scope: provided
+  :jstl:1.2
+    scope: provided
+  
