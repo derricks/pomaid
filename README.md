@@ -33,7 +33,7 @@ Adds a dependency on a library with the relevant group\_id, artifact\_id, and op
 
 ### Multiple dependencies for a shared group
 `
-+ group_id
+\+ group_id
    :artifact_1_id:version
    :artifact_2_id:version
 `
