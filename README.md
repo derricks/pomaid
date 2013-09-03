@@ -106,3 +106,11 @@ This is again copied from the Spring pom.xml file, and mixes literal text with p
     distribution:repo
 <- <-
 ``
+
+Comments
+--------
+Lines prefixed with # are ignored.
+
+Blank Lines
+-----------
+Blank lines in the pomaid file will be copied into the output. Note, however, that the rules about adding to dependencies still apply: You may find that a blank line is inserted _before_ the `</dependency>` line.

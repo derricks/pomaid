@@ -1,3 +1,5 @@
+# This is a representation of a Spring pom.xml file that was in the normal Maven repository.
+
 groupId: org.springframework
 artifactId:spring-webmvc
 version: 3.2.4.RELEASE
