@@ -32,7 +32,8 @@ Whenever a dependency is created, the corresponding `</dependency>` element will
 Adds a dependency on a library with the relevant group\_id, artifact\_id, and optional version. version is optional because many projects list all dependencies (with version) in a top-level pom and then reference them in submodules.
 
 ### Multiple dependencies for a shared group
-`+ group_id
+`
++ group_id
    :artifact_1_id:version
    :artifact_2_id:version
 `
