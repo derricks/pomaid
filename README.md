@@ -55,6 +55,25 @@ The following example comes from a pomaid version of a [Spring pom.xml from the 
 
 The first line starts a set of dependencies all in the same group. The second line adds one of the specific artifacts within the group. The `scope` and `optional` lines will add the appropriate values to the tiles-api dependency. The tiles-core dependency is similar, but it also includes an exclusion of org.slf4j:jcl-over-slf4j. This will be applied to the tiles-core dependency, not the tiles-api dependency.
 
+Arbitrary Hierarchy
+-------------------
+pom.xml files often have a variety of nested elements that aren't easily abstracted into a specialized syntax, so pomaid support yaml-style elements that translate into start/end elements in the pom.xml. yaml means that siblings within a hierarchy must have consistent spacing from the edge.
+
+### Example
+Again, taken from a pomaid version of the Spring MVC pom.xml.
+
+    licenses:
+      license:
+        name: The Apache Software License, Version 2.0
+        url:http://www.apache.org/licenses/LICENSE-2.0.txt
+        distribution:repo
+
+    developers:
+      developer:
+        id:jhoeller
+        name: Juergen Hoeller
+        email:jhoeller@vmware.com
+    
 Literal Text
 ------------
 Rather than support every conceivable Maven directive, pomaid lets you define text inline that is copied directly to the output.

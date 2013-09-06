@@ -71,6 +71,7 @@ function indent_level(level) {
 
 # Create the <dependencies> element, but only if necessary
 function start_dependencies() {
+  close_hierarchy(yaml_hierarchy, 1)
   close_properties()
   if (!has_printed_dependencies) {
      has_printed_dependencies = 1
@@ -81,6 +82,7 @@ function start_dependencies() {
 
 # Opens the properties element, if needed
 function start_properties() {
+  close_hierarchy(yaml_hierarchy, 1)
   if (!has_printed_properties) {
     indent_print(as_start_element("properties"))
     increment_indent()
@@ -178,6 +180,33 @@ function indent_print(text) {
   print indent_level(current_indent_level) text  
 }
 
+# Close out the last n hierarchy of elements for yaml style nesting
+# hierarchy: the current list of items in the yaml-style hierarch
+# up_through: the index (plus followers) of the item to close out (and delete from the array)
+function close_hierarchy(hierarchy, up_through) {
+  for (hierarchy_index = length(hierarchy); hierarchy_index >= up_through; hierarchy_index--) {
+     decrement_indent()
+     indent_print(as_end_element(hierarchy[hierarchy_index]))
+     delete hierarchy[hierarchy_index]
+  }
+}
+
+# Given an array of strings, delete any that are longer than the passed-in string
+# array: array of items to investigate
+# max_length_string: the longest string that should be allowed in the list
+function delete_entries_longer_than(array, max_length_string,   items_to_delete_index,   items_to_delete) {
+  for (item in array) {
+    if (length(item) > length(max_length_string)) {
+      items_to_delete[length(items_to_delete) + 1] = item
+    }
+  }
+  
+  for (item_to_delete in items_to_delete) {
+    delete array[item_to_delete]
+  }
+}
+
+
 # print a dependency item
 function print_dependency(groupId, artifactId, version) {
   indent_print(as_text_only_element("groupId", groupId))
@@ -197,6 +226,9 @@ BEGIN {
         " xsi:schemaLocation=\"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd\">"
   increment_indent()
   indent_print(as_text_only_element("modelVersion", "4.0.0"))
+  
+  yaml_hierarchy[1] = 0
+  delete yaml_hierarchy[1]
 }
 
 # skip comments
@@ -255,11 +287,43 @@ BEGIN {
 }
 
 # Text-only (nothing embedded) elements such as "groupId: my-group"
-/^.*[^\+]*: */ {
+/[^\+]*: *[^ \t\r\n]+/ {
   # replace first : with space for easy parsing
   sub(/:/," ")
   elem_name = substr($1, 1, length($1))
   indent_print(as_text_only_element(elem_name, chop_n_of_string($0, " ", 1)))
+}
+
+# Hierarchical elements, done yaml style. For instance, "build:" starts a build element that will be closed when 
+# another sibling (at the same indent level) or a special-purpose item (such as a dependency) is opened.
+/[^\+]*[ \t\r\n]*[^ \t\r\n]*:[ \t\r\n]*$/ {
+  # figure out the number of spaces preceding the text
+  text_indent = match($0, /[^ \t\r\n]/)
+  spaces = substr($0, 1, text_indent -1)
+  
+  # now normalize $0
+  gsub(/[ \t\r\n/]/, "")
+  sub(/:/," ")
+  
+  if (spaces in hierarchy_indents) {
+     # in this case, see what level of the hierarchy we're in and close out any tags as appropriate
+     logical_indent = hierarchy_indents[spaces]
+     close_hierarchy(yaml_hierarchy, logical_indent)
+     delete_entries_longer_than(hierarchy_indents, spaces)
+     
+     yaml_hierarchy[logical_indent] = $1
+     indent_print(as_start_element(yaml_hierarchy[logical_indent]))
+     increment_indent()
+  } else {
+     # in this case, we need to add an item to the hierarchy     
+     logical_indent = length(yaml_hierarchy) + 1
+     hierarchy_indents[spaces] = logical_indent
+     yaml_hierarchy[logical_indent] = $1
+     
+     indent_print(as_start_element(yaml_hierarchy[logical_indent]))
+     increment_indent()
+  }
+  
 }
 
 # blank lines translate into blank lines

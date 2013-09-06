@@ -8,47 +8,26 @@ name: Spring Web MVC
 description: Spring Web MVC
 url: https://github.com/SpringSource/spring-framework
 
-```
-<organization>
-```
-->
+organization:
   name: SpringSource
   url: http://springsource.org/spring-framework
-<-
-```
-</organization>
-<licenses>
-  <license>
-```
--> ->
+  
+licenses:
+  license:
     name: The Apache Software License, Version 2.0
     url:http://www.apache.org/licenses/LICENSE-2.0.txt
     distribution:repo
-<- <-
-```
-  </license>
-</licenses>
-<developers>
-  <developer>
-```
--> ->
+
+developers:
+  developer:
     id:jhoeller
     name: Juergen Hoeller
     email:jhoeller@vmware.com
-<- <-
-```
-  </developer>
-</developers>
-<scm>
-```
-->
+
+scm:
   connection: scm:git:git://github.com/SpringSource/spring-framework
   developerConnection: scm:git:git://github.com/SpringSource/spring-framework
   url: https://github.com/SpringSource/spring-framework
-<-
-```
-</scm>
-```
 
 + com.fasterxml.jackson.core:jackson-databind:2.0.1
   scope: compile
