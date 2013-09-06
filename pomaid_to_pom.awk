@@ -302,7 +302,7 @@ BEGIN {
   spaces = substr($0, 1, text_indent -1)
   
   # now normalize $0
-  gsub(/[ \t\r\n/]/, "")
+  gsub(/[ \t\r\n]/, "")
   sub(/:/," ")
   
   if (spaces in hierarchy_indents) {
